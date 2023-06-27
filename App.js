@@ -7,16 +7,38 @@ import HomePage from './pages/HomePage';
 
 const Stack = createStackNavigator();
 
-export default function App() {
+// Context
+import { cities, AppContext } from './appContext';
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Gyms" component={GymBrowsePage} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.changeCity = (city) => {
+      this.setState({
+        city: city
+      })
+    }
+    this.state = {
+      city: cities.bangalore,
+      changeCity: this.changeCity
+    }
+  }
+
+
+
+  render() {
+
+    return (
+      <NavigationContainer>
+        <AppContext.Provider value={this.state}>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomePage} changeCity={this.changeCity} />
+            <Stack.Screen name="Gyms" component={GymBrowsePage} />
+          </Stack.Navigator>
+        </AppContext.Provider>
+      </NavigationContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -27,3 +49,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
