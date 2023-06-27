@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import React from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { AppContext } from '../appContext';
+import { AppContext, cities } from '../appContext';
 
 class CityDropDown extends React.Component {
     constructor(props) {
@@ -9,15 +9,16 @@ class CityDropDown extends React.Component {
         this.state = {
             open: false,
             items: [
-                { label: 'Bangalore', value: 'bangalore' },
-                { label: 'Chennai', value: 'chennai' },
-                { label: 'Mumbai', value: 'mumbai' }
+                { label: 'Bangalore', value: cities.bangalore },
+                { label: 'Chennai', value: cities.chennai },
+                { label: 'Mumbai', value: cities.mumbai }
             ],
             value: null
         }
 
         this.setValue = this.setValue.bind(this);
         this.setOpen = this.setOpen.bind(this);
+        this.setItems = this.setItems.bind(this);
     }
 
     setOpen(open) {
