@@ -17,10 +17,13 @@ class CityDropDown extends React.Component {
         }
 
         this.setValue = this.setValue.bind(this);
+        this.setOpen = this.setOpen.bind(this);
     }
 
     setOpen(open) {
-        this.setState({ open });
+        this.setState({
+            open
+        });
     }
 
     setValue(callback) {
