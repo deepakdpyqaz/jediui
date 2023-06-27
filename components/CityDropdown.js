@@ -50,7 +50,7 @@ class CityDropDown extends React.Component {
                             setValue={this.setValue}
                             setOpen={this.setOpen}
                             setItems={this.setItems}
-                            onChangeItem={(item) => changeCity(item.value)}
+                            onSelectItem={(item) => changeCity(item.value)}
                             containerStyle={{ height: 40 }}
                         />
                     </View >
