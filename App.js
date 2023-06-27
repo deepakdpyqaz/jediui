@@ -1,13 +1,21 @@
 import { StyleSheet, SafeAreaView } from 'react-native';
 import React from 'react';
-import CityDropDown from './components/Dropdown';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import GymBrowsePage from './pages/GymBrowsePage';
+import HomePage from './pages/HomePage';
+
+const Stack = createStackNavigator();
 
 export default function App() {
 
   return (
-    <SafeAreaView style={styles.container}>
-      <CityDropDown />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="Gyms" component={GymBrowsePage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
