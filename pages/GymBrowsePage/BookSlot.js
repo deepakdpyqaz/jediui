@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import Toast from 'react-native-toast-message';
 import { AppContext } from "../../appContext";
 
 class BookSlot extends React.Component {
@@ -21,6 +22,14 @@ class BookSlot extends React.Component {
             })
             .then(res => this.setState({ data: res }))
             .catch(err => console.error(err));
+    }
+
+    showToast = (gymString) => {
+        Toast.show({
+            type: 'success',
+            text1: gymString,
+            text2: 'Gym booked 🏋️'
+          });
     }
 
     renderList = (el) => {
