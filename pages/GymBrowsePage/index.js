@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+import BookSlot from "./BookSlot";
 import MyBookings from "./MyBookings";
 
 const Tab = createBottomTabNavigator();
@@ -12,7 +13,7 @@ class GymBrowsePage extends React.Component {
       <Tab.Navigator>
         <Tab.Screen
           name="Book Slot"
-          component={MyBookings}
+          component={BookSlot}
           options={{
             tabBarLabel: "Book Slot",
             tabBarIcon: ({ color, size }) => (

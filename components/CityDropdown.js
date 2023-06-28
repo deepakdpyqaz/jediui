@@ -10,7 +10,7 @@ class CityDropDown extends React.Component {
       open: false,
       items: [
         { label: "Bangalore", value: cities.bangalore },
-        { label: "Chennai", value: cities.chennai },
+        { label: "Delhi", value: cities.delhi },
         { label: "Mumbai", value: cities.mumbai },
       ],
       value: null,

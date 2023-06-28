@@ -2,7 +2,7 @@ import React from "react";
 
 export const cities = {
     bangalore: "Bangalore",
-    chennai: "Chennai",
+    delhi: "Delhi",
     mumbai: "Mumbai"
 }
 
