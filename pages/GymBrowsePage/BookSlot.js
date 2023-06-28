@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Toast from 'react-native-toast-message';
 import { AppContext } from "../../appContext";
 
@@ -9,6 +9,31 @@ class BookSlot extends React.Component {
         this.state = {
             data: null
         }
+    }
+
+    bookGym = (name, city) => {
+        console.log("bookGym", name, city);
+        const startTime = Date.now();
+        const endTime = Date.now();
+
+        const dataToSend = {
+            gym: name,
+            city,
+            start_time: startTime,
+            end_time: endTime,
+        }
+
+        fetch("http://localhost:3000/api/book-slot", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataToSend),
+        })
+            .then(res => res.json)
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
     }
 
     componentDidMount() {
@@ -29,15 +54,17 @@ class BookSlot extends React.Component {
             type: 'success',
             text1: gymString,
             text2: 'Gym booked 🏋️'
-          });
+        });
     }
 
     renderList = (el) => {
         return (
-            <View key={el.slug} style={styles.container}>
-                <Text style={styles.text}>{el.name}</Text>
-                <Text style={styles.text}>{el.city}</Text>
-            </View>
+            <TouchableOpacity key={el.slug} onPress={() => this.bookGym(el.name, el.city)}>
+                <View style={styles.container}>
+                    <Text style={styles.text}>{el.name}</Text>
+                    <Text style={styles.text}>{el.city}</Text>
+                </View>
+            </TouchableOpacity>
         )
     }
 
