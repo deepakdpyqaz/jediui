@@ -31,8 +31,8 @@ class BookSlot extends React.Component {
             },
             body: JSON.stringify(dataToSend),
         })
-            .then(res => res.json)
-            .then(res => console.log(res))
+            .then(res => res.json())
+            .then(res => this.showToast(`${res.gym}-${res.city}`))
             .catch(err => console.error(err))
     }
 
@@ -50,6 +50,7 @@ class BookSlot extends React.Component {
     }
 
     showToast = (gymString) => {
+        console.log(gymString)
         Toast.show({
             type: 'success',
             text1: gymString,

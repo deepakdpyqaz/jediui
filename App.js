@@ -2,6 +2,7 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import Toast from 'react-native-toast-message';
 import GymBrowsePage from "./pages/GymBrowsePage";
 import HomePage from "./pages/HomePage";
 
@@ -46,6 +47,7 @@ class App extends React.Component {
             />
           </Stack.Navigator>
         </AppContext.Provider>
+        <Toast />
       </NavigationContainer>
     );
   }
