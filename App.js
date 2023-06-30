@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Toast from 'react-native-toast-message';
 import GymBrowsePage from "./pages/GymBrowsePage";
-import HomePage from "./pages/HomePage";
-
+import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
 const Stack = createStackNavigator();
 
 // Context
@@ -31,8 +31,16 @@ class App extends React.Component {
         <AppContext.Provider value={this.state}>
           <Stack.Navigator>
             <Stack.Screen
-              name="Home"
-              component={HomePage}
+              name="Login"
+              component={LoginPage}
+              changeCity={this.changeCity}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Registration"
+              component={RegistrationPage}
               changeCity={this.changeCity}
               options={{
                 headerShown: false,
