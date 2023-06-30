@@ -16,16 +16,18 @@ class Button extends React.Component{
 }
 const styles = StyleSheet.create({
     button:{
-        backgroundColor:"#FFB606",
+        backgroundColor:"#FFF",
         color: "#fff",
-        width: "50%",
-        borderRadius: 20
+        width: 200,
+        borderRadius: 20,
+        zIndex:-1
     },
     buttonText:{
         fontWeight: 300,
         fontSize: 22,
         textAlign: "center",
-        padding: 4
+        padding: 4,
+        zIndex:-1
     }
 })
 export default Button;

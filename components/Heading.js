@@ -15,7 +15,7 @@ class Heading extends React.Component{
 
 const styles = StyleSheet.create({
     heading:{
-        color:"#FFB606",
+        color:"#FFF",
         fontSize: 32,
         marginVertical: 4
     }

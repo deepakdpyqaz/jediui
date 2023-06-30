@@ -58,7 +58,7 @@ class LoginPage extends React.Component {
       <View style={styles.container}>
         <ImageBackground resizeMode="cover" source={require("../assets/background.jpeg")} style={styles.image}>
           <View style={styles.paper}>
-            <Heading style={styles.heading}>Login</Heading>
+            {/* <Heading style={styles.heading}>Login</Heading> */}
             <Input placeholder="Username" onChangeText={(val) => { this.setState({ "username": val }) }} />
             <Input placeholder="Password" isSecured={true} onChangeText={(val) => { this.setState({ "password": val }) }} />
             <Button onPress={() => this.handleSubmit()}>Login</Button>
@@ -89,16 +89,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#0008",
     alignSelf: "center",
     padding: 10,
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    alignItems: "center"
   },
   heading: {
     textAlign: "left",
-    borderBottomColor: "#FFB606",
+    borderBottomColor: "#FFF",
     borderBottomWidth: 3,
     marginBottom: 30
   },
   link:{
-    color: "#FFB606"
+    color: "#FFF"
   }
 });
 

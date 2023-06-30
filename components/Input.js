@@ -21,7 +21,7 @@ class Input extends React.Component{
                 secureTextEntry={this.props.isSecured} 
                 style={styles.textinput} 
                 onChangeText={this.handleChange} 
-                placeholderTextColor="#FFB60666" 
+                placeholderTextColor="#FFF8" 
                 placeholder={this.props.placeholder}
                 multiline={this.props.multiline}
                 numberOfLines={this.props.multiline?2:1}
@@ -33,14 +33,15 @@ class Input extends React.Component{
 }
 const styles = StyleSheet.create({
     textinput:{
-        color: "#FFB606",
+        color: "#FFF",
         fontSize: 18,
-        borderLeftColor: "#FFB606",
-        borderBottomColor: "#FFB606",
+        borderLeftColor: "#FFF",
+        borderBottomColor: "#FFF",
         padding: 2,
         borderWidth: 1,
         borderRadius: 5,
-        marginVertical: 5
+        marginVertical: 5,
+        width: "100%"
     }
 })
 export default Input;
