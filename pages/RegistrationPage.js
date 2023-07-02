@@ -8,6 +8,7 @@ import Heading from "../components/Heading";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { RadioButton } from 'react-native-paper';
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 class RegistrationPage extends React.Component {
     constructor(props) {
@@ -20,23 +21,61 @@ class RegistrationPage extends React.Component {
             "phone": "",
             "gender": "",
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    async handleSubmit() {
+        try {
+            const res = await fetch("http://10.0.2.2:8080/customer/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(this.state) })
+            if (res.status === 201) {
+                const jsonRes = await res.json();
+                Toast.show({
+                    type: "success",
+                    text1: "Registration Successfull",
+                    text2: "Please login to continue",
+                    autoHide: true,
+                    visibilityTime: 5000
+                })
+                this.props.navigation.navigate("Login");
+            }
+            else {
+                Toast.show({
+                    type: "error",
+                    text1: "Registration Failed",
+                    text2: res.message || "Please try again",
+                    autoHide: true,
+                    visibilityTime: 5000
+                })
+            }
+        }
+        catch (err) {
+            console.log(err);
+            Toast.show({
+                type: "error",
+                text1: "Registration Failed",
+                text2: err.message|| "Please try again",
+                autoHide: true,
+                visibilityTime: 5000
+            })
+        }
+    }
 
     render() {
         return (
             <View style={styles.container}>
                 <ImageBackground resizeMode="cover" source={require("../assets/background_home.png")} style={styles.image}>
                     <View style={styles.paper}>
-                        {/* <Heading style={styles.heading}>Registration</Heading> */}
                         <Input placeholder="Username" onChangeText={(val) => { this.setState({ "username": val }) }} />
                         <Input placeholder="Password" isSecured={true} onChangeText={(val) => { this.setState({ "password": val }) }} />
                         <Input placeholder="Name" onChangeText={(val) => { this.setState({ "name": val }) }} />
                         <Input placeholder="Address" onChangeText={(val) => { this.setState({ "address": val }) }} multiline={true} />
                         <Input placeholder="Phone" onChangeText={(val) => { this.setState({ "phone": val }) }} />
                         <View style={styles.row}>
-                            <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{ "color": "#fff" }}>
+                            <Text style={{ color: "#fff", alignSelf: "center", fontSize: 20 }}>
+                                Gender
+                            </Text>
+                            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                <Text style={{ "color": "#fff", fontSize: 20 }}>
                                     Male:
                                 </Text>
                                 <RadioButton
@@ -46,18 +85,18 @@ class RegistrationPage extends React.Component {
                                     color="#fff"
                                 />
                             </View>
-                            <View style={{flexDirection:"row",alignItems:"center"}}>
-                            <Text style={{ "color": "#fff" }}>Female: </Text>
-                            <RadioButton
-                                value="second"
-                                status={this.state.gender === 'F' ? 'checked' : 'unchecked'}
-                                onPress={() => this.setState({ "gender": "F" })}
-                                color="#fff"
+                            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                <Text style={{ "color": "#fff", fontSize: 20 }}>Female: </Text>
+                                <RadioButton
+                                    value="second"
+                                    status={this.state.gender === 'F' ? 'checked' : 'unchecked'}
+                                    onPress={() => this.setState({ "gender": "F" })}
+                                    color="#fff"
                                 />
-                                </View>
+                            </View>
                         </View>
-                        <Button onPress={() => this.handleSubmit()}>Registration</Button>
-                        <Text style={styles.link} onPress={() => { this.props.navigation.navigate("Registration") }}>Create new account &gt;</Text>
+                        <Button style={styles.button} onPress={() => this.handleSubmit()}>Registration</Button>
+                        <Text style={styles.link} onPress={() => { this.props.navigation.navigate("Login") }}>Already have a account &gt;</Text>
                     </View>
                 </ImageBackground>
             </View>
@@ -73,6 +112,7 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: "#DDDDDD",
         padding: 10,
+        marginVertical: 50
     },
     image: {
         flex: 1,
@@ -80,7 +120,7 @@ const styles = StyleSheet.create({
     },
     paper: {
         width: 350,
-        height: 400,
+        height: 450,
         backgroundColor: "#0008",
         alignSelf: "center",
         padding: 10,
@@ -102,10 +142,9 @@ const styles = StyleSheet.create({
     row: {
         flex: 1,
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         width: "100%",
-        borderColor:"red",
-        borderWidth:2
+        fontSize: 20
     }
 });
 

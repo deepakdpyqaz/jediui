@@ -9,7 +9,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 const Stack = createStackNavigator();
 
 // Context
-import { cities, AppContext } from "./appContext";
+import { cities, AppContext, user } from "./appContext";
 
 class App extends React.Component {
   constructor(props) {
@@ -19,9 +19,16 @@ class App extends React.Component {
         city: city,
       });
     };
+    this.changeUser = (user) => {
+      this.setState({
+        user: user,
+      })
+    }
     this.state = {
       city: cities.bangalore,
       changeCity: this.changeCity,
+      user: null,
+      changeUser: this.changeUser,
     };
   }
 

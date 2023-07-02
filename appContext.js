@@ -6,9 +6,12 @@ export const cities = {
     mumbai: "Mumbai"
 }
 
+
 const globalContext = {
     city: cities.bangalore,
-    changeCity: () => { }
+    user: null,
+    changeCity: () => { },
+    changeUser:()=>{}
 }
 
 export const AppContext = React.createContext(globalContext)

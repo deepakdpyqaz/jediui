@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import BookSlot from "./BookSlot";
+import ViewGym from "./ViewGym";
 import MyBookings from "./MyBookings";
 
 const Tab = createBottomTabNavigator();
@@ -10,10 +10,27 @@ const Tab = createBottomTabNavigator();
 class GymBrowsePage extends React.Component {
   render() {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator sceneContainerStyle={{backgroundColor:"#fff"}}> 
         <Tab.Screen
-          name="Book Slot"
-          component={BookSlot}
+          name="Choose your favourite gym!"
+          component={ViewGym}
+          options={{
+            tabBarLabel: "Gyms",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="kabaddi"
+                color={color}
+                size={size}
+              />
+            ),
+            tabBarActiveTintColor:'#7353BA',
+            headerShown:false,
+          }}
+        />
+        <Tab.Screen
+          name="Slot"
+          component={ViewGym}
+
           options={{
             tabBarLabel: "Book Slot",
             tabBarIcon: ({ color, size }) => (
@@ -23,6 +40,7 @@ class GymBrowsePage extends React.Component {
                 size={size}
               />
             ),
+            tabBarActiveTintColor:'#7353BA'
           }}
         />
         <Tab.Screen
@@ -37,6 +55,22 @@ class GymBrowsePage extends React.Component {
                 size={size}
               />
             ),
+            tabBarActiveTintColor:'#7353BA'
+          }}
+        />
+        <Tab.Screen
+          name="My Profile"
+          component={MyBookings}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account"
+                color={color}
+                size={size}
+              />
+            ),
+            tabBarActiveTintColor:'#7353BA'
           }}
         />
       </Tab.Navigator>

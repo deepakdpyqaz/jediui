@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         padding: 2,
         borderWidth: 1,
         borderRadius: 5,
-        marginVertical: 5,
+        marginVertical: 10,
         width: "100%"
     }
 })

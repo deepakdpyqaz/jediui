@@ -19,38 +19,64 @@ class LoginPage extends React.Component {
     }
   }
   async handleSubmit() {
-    const res = await fetch("http://10.0.2.2:8080/user/login", 
-    { 
-      method: "POST", 
-      mode: "cors", 
-      headers: { "Content-Type": "application/json" }, 
-      body: JSON.stringify(this.state) 
-    });
-    if(res.status==200){
-      const jsonRes = await res.json();
-      Toast.show(
+    try {
+      const res = await fetch("http://10.0.2.2:8080/user/login",
         {
-          type:"success",
-          text1:`Welcome!! ${jsonRes.name}`,
-          text2: "You have been succesfully logged in",
-          position:"top",
-          autoHide:true,
-          visibilityTime: 5000
-        }
-      )
-      this.props.navigation.navigate("Gyms");
-    }
-    else{
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(this.state)
+        });
+      if (res.status == 200) {
         const jsonRes = await res.json();
+        if(jsonRes.roleId!=2){
+          Toast.show(
+            {
+              type: "error",
+              text1: `You are not authorized to login`,
+              position: "top",
+              autoHide: true,
+              visibilityTime: 5000
+            }
+          )
+          return;
+        }
         Toast.show(
           {
-            type:"error",
-            text1:`${jsonRes.error}`,
-            position:"top",
-            autoHide:true,
+            type: "success",
+            text1: `Welcome!! ${jsonRes.name}`,
+            text2: "You have been succesfully logged in",
+            position: "top",
+            autoHide: true,
             visibilityTime: 5000
           }
         )
+        this.context.changeUser({username:jsonRes.username,name:jsonRes.name,roleId:jsonRes.roleId});
+        this.props.navigation.replace("Gyms");
+      }
+      else {
+        const jsonRes = await res.json();
+        Toast.show(
+          {
+            type: "error",
+            text1: `${jsonRes.error}`,
+            position: "top",
+            autoHide: true,
+            visibilityTime: 5000
+          }
+        )
+      }
+    }
+    catch (err) {
+      Toast.show(
+        {
+          type: "error",
+          text1: `${err}`,
+          position: "top",
+          autoHide: true,
+          visibilityTime: 5000
+        }
+      )
     }
   };
   render() {
@@ -62,7 +88,7 @@ class LoginPage extends React.Component {
             <Input placeholder="Username" onChangeText={(val) => { this.setState({ "username": val }) }} />
             <Input placeholder="Password" isSecured={true} onChangeText={(val) => { this.setState({ "password": val }) }} />
             <Button onPress={() => this.handleSubmit()}>Login</Button>
-            <Text style={styles.link} onPress={()=>{this.props.navigation.navigate("Registration")}}>Create new account &gt;</Text>
+            <Text style={styles.link} onPress={() => { this.props.navigation.navigate("Registration") }}>Create new account &gt;</Text>
           </View>
         </ImageBackground>
       </View>
@@ -98,7 +124,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     marginBottom: 30
   },
-  link:{
+  link: {
     color: "#FFF"
   }
 });
@@ -106,3 +132,4 @@ const styles = StyleSheet.create({
 LoginPage.contextType = AppContext;
 
 export default LoginPage;
+
