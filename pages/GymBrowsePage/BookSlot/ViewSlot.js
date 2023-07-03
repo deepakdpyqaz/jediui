@@ -49,10 +49,10 @@ class ViewSlot extends React.Component {
     async checkAvailablity(slot_id) {
         try {
             const res = await fetch(`http://10.0.2.2:8080/booking_slot/clashing-slot/${this.context.user.username}/${slot_id}`,{method:"POST"});
-            console.log(res);
             if (res.status == 200) {
                 const jsonRes = await res.json();
-                if (jsonRes != true) {
+                console.log(jsonRes);
+                if (jsonRes && jsonRes.clashing == "true") {
                     this.setState({
                         modalText: "You already have a booking on same time. Would you like to book this slot and cancel previous"
                     })
@@ -72,6 +72,7 @@ class ViewSlot extends React.Component {
                     visibilityTime: 5000
                 }
             )
+            console.log(err);
         }
     }
     async bookSlot(slot_id) {

@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 class GymBrowsePage extends React.Component {
   render() {
     return (
-      <Tab.Navigator sceneContainerStyle={{backgroundColor:"#fff"}}> 
+      <Tab.Navigator sceneContainerStyle={{backgroundColor:"#fff"}} screenOptions={{unmountOnBlur:true}}> 
         <Tab.Screen
           name="Choose your favourite gym!"
           component={BookSlot}
@@ -43,7 +43,7 @@ class GymBrowsePage extends React.Component {
             tabBarActiveTintColor:'#7353BA'
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="My Profile"
           component={MyBookings}
           options={{
@@ -57,7 +57,7 @@ class GymBrowsePage extends React.Component {
             ),
             tabBarActiveTintColor:'#7353BA'
           }}
-        />
+        /> */}
       </Tab.Navigator>
     );
   }

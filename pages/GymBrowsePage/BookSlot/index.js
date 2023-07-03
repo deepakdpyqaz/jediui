@@ -12,15 +12,17 @@ class BookSlot extends React.Component{
     }
     render(){
         return(
-                <Stack.Navigator screenOptions={{sceneContainerStyle:{backgroundColor:"#fff"}}}>
+                <Stack.Navigator screenOptions={{sceneContainerStyle:{backgroundColor:"#fff"},unmountOnBlur:true}}>
                     <Stack.Screen
                         name="Available Gyms"
                         component={ViewGym}
+                        options={{unmountOnBlur:true}}
                     />
 
                     <Stack.Screen
                         name="Select slot"
                         component={ViewSlot}
+                        options={{unmountOnBlur:true}}
                     />
                 </Stack.Navigator>
         )
