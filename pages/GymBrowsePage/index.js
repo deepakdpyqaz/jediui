@@ -2,8 +2,9 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import ViewGym from "./ViewGym";
+import ViewGym from "./BookSlot/ViewGym";
 import MyBookings from "./MyBookings";
+import BookSlot from "./BookSlot";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,7 +14,7 @@ class GymBrowsePage extends React.Component {
       <Tab.Navigator sceneContainerStyle={{backgroundColor:"#fff"}}> 
         <Tab.Screen
           name="Choose your favourite gym!"
-          component={ViewGym}
+          component={BookSlot}
           options={{
             tabBarLabel: "Gyms",
             tabBarIcon: ({ color, size }) => (
@@ -25,22 +26,6 @@ class GymBrowsePage extends React.Component {
             ),
             tabBarActiveTintColor:'#7353BA',
             headerShown:false,
-          }}
-        />
-        <Tab.Screen
-          name="Slot"
-          component={ViewGym}
-
-          options={{
-            tabBarLabel: "Book Slot",
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="kabaddi"
-                color={color}
-                size={size}
-              />
-            ),
-            tabBarActiveTintColor:'#7353BA'
           }}
         />
         <Tab.Screen

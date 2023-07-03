@@ -48,7 +48,7 @@ class LoginPage extends React.Component {
             text2: "You have been succesfully logged in",
             position: "top",
             autoHide: true,
-            visibilityTime: 5000
+            visibilityTime: 2000
           }
         )
         this.context.changeUser({username:jsonRes.username,name:jsonRes.name,roleId:jsonRes.roleId});
@@ -84,7 +84,6 @@ class LoginPage extends React.Component {
       <View style={styles.container}>
         <ImageBackground resizeMode="cover" source={require("../assets/background.jpeg")} style={styles.image}>
           <View style={styles.paper}>
-            {/* <Heading style={styles.heading}>Login</Heading> */}
             <Input placeholder="Username" onChangeText={(val) => { this.setState({ "username": val }) }} />
             <Input placeholder="Password" isSecured={true} onChangeText={(val) => { this.setState({ "password": val }) }} />
             <Button onPress={() => this.handleSubmit()}>Login</Button>

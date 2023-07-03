@@ -1,45 +1,28 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, FlatList } from "react-native";
 import Toast from 'react-native-toast-message';
-import { AppContext } from "../../appContext";
+import { AppContext } from "../../../appContext";
 
 class ViewGym extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: null,
-            gyms:[{"gymName":"name1","address":"1","gymId":2123},{"gymName":"name1","address":"1","gymId":200}]
+            gyms:[]
         }
     }
 
-    bookGym = (name, city) => {
-        this.props.navigation.navigate("Slot")
+    bookGym = (gym) => {
+        this.props.navigation.navigate("Select slot",{gym})
     }
 
     async getAllGyms(){
         const res = await fetch("http://10.0.2.2:8080/gym/all");
         const gyms = await res.json();
-        console.log(gyms);
         this.setState({gyms:gyms});
-    }
-    componentDidMount() {
-        try{
-            this.getAllGyms();
-        }
-        catch(err){
-            Toast.show({
-                type:"error",
-                text1: "Error in getting list of gyms",
-                text2: "Please try again after sometime",
-                autoHide: true,
-                visibilityTime: 10000
-            })
-        }
-
     }
 
     showToast = (gymString) => {
-        console.log(gymString)
         Toast.show({
             type: 'success',
             text1: gymString,
@@ -50,7 +33,7 @@ class ViewGym extends React.Component {
 
     ListItem = ({item,index,separator}) => {
         return (
-            <TouchableOpacity key={item.gymId} onPress={()=>this.bookGym(item.gymId)}>
+            <TouchableOpacity key={item.gymId} onPress={()=>this.bookGym(item)}>
                 <View style={styles.listItem}>
                     <Text style={styles.gymName}>{item.gymName}</Text>
                     <Text style={styles.address}>{item.address}</Text>
@@ -62,6 +45,18 @@ class ViewGym extends React.Component {
     componentDidMount(){
         if(!(this.context.user && this.context.user.username)){
             this.props.navigation.replace("Login")
+        }
+        try{
+            this.getAllGyms();
+        }
+        catch(err){
+            Toast.show({
+                type:"error",
+                text1: "Error in getting list of gyms",
+                text2: "Please try again after sometime",
+                autoHide: true,
+                visibilityTime: 10000
+            })
         }
     }
 
